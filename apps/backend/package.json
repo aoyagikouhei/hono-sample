@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.19.9",
+    "@hono/swagger-ui": "^0.5.3",
+    "@hono/zod-openapi": "^1.2.0",
     "hono": "^4.11.4"
   },
   "devDependencies": {
@@ -15,6 +17,8 @@
     "@types/node": "^20.11.17",
     "tsx": "^4.7.1",
     "typescript": "^5.8.3",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "vitest": "^4.0.17",
+    "zod": "^4.3.5"
   }
 }
