@@ -1,7 +1,7 @@
 import { z } from '@hono/zod-openapi'
 
 // ユーザースキーマ
-export const UserSchema = z.object({
+const UserSchemaBase = z.object({
   id: z.string().openapi({
     example: '123',
     description: 'ユーザーID',
@@ -23,6 +23,14 @@ export const UserSchema = z.object({
     description: '作成日時',
   }),
 })
+
+export const UserSchema = Object.assign(UserSchemaBase, {
+  metadata: {
+    name: 'UserSchema',
+  },
+})
+
+
 
 // ユーザー作成リクエストスキーマ
 export const CreateUserRequestSchema = z.object({

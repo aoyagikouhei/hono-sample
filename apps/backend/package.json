@@ -5,7 +5,8 @@
     "dev": "vite",
     "build": "tsc",
     "vitest": "vitest",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "tsx": "npx tsx src/generate.ts"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.9",
@@ -15,11 +16,17 @@
   },
   "devDependencies": {
     "@hono/vite-dev-server": "^0.24.1",
+    "@types/ejs": "^3.1.5",
+    "@types/lodash": "^4.17.23",
     "@types/node": "^20.11.17",
+    "ejs": "^4.0.1",
+    "lodash": "^4.17.23",
+    "lodash-inflection": "^1.5.0",
     "tsx": "^4.7.1",
     "typescript": "^5.8.3",
     "vite": "^7.3.1",
     "vitest": "^4.0.17",
     "zod": "^4.3.5"
-  }
+  },
+  "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264"
 }
