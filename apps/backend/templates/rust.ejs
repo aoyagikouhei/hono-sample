@@ -1,5 +1,21 @@
 <%
 const structName = _.capitalize(_.camelCase(_.pluralize(src.metadata.name)));
-%>
-pub struct <%= structName %> {
+const getType = (column) => {
+    let innreType = '';
+    switch (column.type) {
+        case 'string':
+            innreType = 'String';
+            break;
+        case 'number':
+            innreType = 'i64';
+            break;
+    }
+    if (column.optional) {
+        return `Option<${innreType}>`;
+    } else {
+        return innreType;
+    }
+};
+%>pub struct <%- structName %> {<% for (const column of columns) { %>
+    pub <%- _.camelCase(column.name) %>: <%- getType(column) %>,<% } %>
 }
