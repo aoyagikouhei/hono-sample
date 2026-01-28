@@ -16,6 +16,9 @@ const getType = (column) => {
         return innreType;
     }
 };
-%>pub struct <%- structName %> {<% for (const column of columns) { %>
+%>use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct <%- structName %> {<% for (const column of columns) { %>
     pub <%- _.camelCase(column.name) %>: <%- getType(column) %>,<% } %>
 }
