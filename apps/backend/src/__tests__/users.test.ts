@@ -1,14 +1,44 @@
-import { describe, expect, test } from 'vitest'
+import { afterEach, beforeEach, describe, expect, test } from 'vitest'
 import app from '../index'
 import {
   UserSchema,
   UsersListResponseSchema,
   ErrorResponseSchema,
 } from '../schemas/user'
+import { PGlite } from '@electric-sql/pglite'
+import { executeMigration } from '../db/migrate'
+import { drizzle } from 'drizzle-orm/pglite'
+import { users } from '../db/schema'
 
 describe('Users API - スキーマ駆動テスト', () => {
+  let client: PGlite
+
+  beforeEach(async () => {
+    client = new PGlite()
+    await executeMigration(client)
+  })
+
+  afterEach(async () => {
+    await client.close()
+  })
+
+  const add = async (name: string, age: number) => {
+    /*
+    let db = drizzle(client)
+    await db.insert(users).values({
+      name,
+      age,
+    });
+    const ret = await db.select().from(users);
+    console.log(ret);
+    */
+  }
+
   describe('GET /users - ユーザー一覧取得', () => {
     test('正しいスキーマのレスポンスを返す', async () => {
+      
+      await add("John", 30);
+      
       const res = await app.request('/users')
 
       expect(res.status).toBe(200)
@@ -20,6 +50,8 @@ describe('Users API - スキーマ駆動テスト', () => {
     })
 
     test('users配列の各要素がUserSchemaに準拠', async () => {
+      await add("John", 30);
+
       const res = await app.request('/users')
       const data = await res.json()
 
@@ -30,6 +62,7 @@ describe('Users API - スキーマ駆動テスト', () => {
     })
 
     test('total値が正しい型', async () => {
+      await add("John", 30);
       const res = await app.request('/users')
       const data = await res.json()
 
