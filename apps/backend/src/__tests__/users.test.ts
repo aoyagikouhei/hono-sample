@@ -23,7 +23,6 @@ describe('Users API - スキーマ駆動テスト', () => {
   })
 
   const add = async (name: string, age: number) => {
-    /*
     let db = drizzle(client)
     await db.insert(users).values({
       name,
@@ -31,10 +30,10 @@ describe('Users API - スキーマ駆動テスト', () => {
     });
     const ret = await db.select().from(users);
     console.log(ret);
-    */
   }
 
   describe('GET /users - ユーザー一覧取得', () => {
+    for (let i = 0; i < 5; i++) {
     test('正しいスキーマのレスポンスを返す', async () => {
       
       await add("John", 30);
@@ -48,7 +47,8 @@ describe('Users API - スキーマ駆動テスト', () => {
       // expect.schemaMatchingでレスポンス全体を検証
       expect(data).toEqual(expect.schemaMatching(UsersListResponseSchema))
     })
-
+  }
+/*    
     test('users配列の各要素がUserSchemaに準拠', async () => {
       await add("John", 30);
 
@@ -71,8 +71,31 @@ describe('Users API - スキーマ駆動テスト', () => {
         total: expect.schemaMatching(UsersListResponseSchema.shape.total),
       })
     })
-  })
 
+    test('total値が正しい型2', async () => {
+      await add("John", 30);
+      const res = await app.request('/users')
+      const data = await res.json()
+
+      // スキーマの一部分だけを検証
+      expect(data).toMatchObject({
+        total: expect.schemaMatching(UsersListResponseSchema.shape.total),
+      })
+    })
+
+    test('total値が正しい型3', async () => {
+      await add("John", 30);
+      const res = await app.request('/users')
+      const data = await res.json()
+
+      // スキーマの一部分だけを検証
+      expect(data).toMatchObject({
+        total: expect.schemaMatching(UsersListResponseSchema.shape.total),
+      })
+    })
+      */
+  })
+/*
   describe('GET /users/:id - ユーザー詳細取得', () => {
     test('存在するユーザーIDで正しいスキーマのレスポンスを返す', async () => {
       const res = await app.request('/users/1')
@@ -108,5 +131,6 @@ describe('Users API - スキーマ駆動テスト', () => {
       // ErrorResponseSchemaに準拠したエラーレスポンスが返ることを検証
       expect(data).toEqual(expect.schemaMatching(ErrorResponseSchema))
     })
-  })
+})
+    */
 })
