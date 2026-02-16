@@ -33,7 +33,7 @@ describe('Users API - スキーマ駆動テスト', () => {
   }
 
   describe('GET /users - ユーザー一覧取得', () => {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 20; i++) {
     test('正しいスキーマのレスポンスを返す', async () => {
       
       await add("John", 30);
